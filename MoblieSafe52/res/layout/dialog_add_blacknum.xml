@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/TitleStyle"
+        android:background="#fcc"
+        android:text="添加黑名单号码"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/et_dialog_balcknum_add"
+        android:layout_width="match_parent"
+        android:inputType="phone"
+        android:layout_height="wrap_content"
+        android:hint="请输入拦截号码"
+        
+        android:textColor="#9000"
+        android:textSize="19sp" >
+    </EditText>
+
+    <RadioGroup
+        android:id="@+id/rg_balck_num_RadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="短信"
+            android:checked="true"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:id="@+id/rb_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电话"
+            android:textColor="@color/black" />
+
+        <RadioButton
+             android:id="@+id/rb_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所有"
+            android:textColor="@color/black" />
+    </RadioGroup>
+    
+      <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/btn_dialog_add_blacknum_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="确认"
+                android:textColor="@color/black" />
+             <Button
+                 android:id="@+id/btn_dialog_add_blacknum_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="取消"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+</LinearLayout>
