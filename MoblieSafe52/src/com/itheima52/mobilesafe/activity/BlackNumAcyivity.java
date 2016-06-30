@@ -172,12 +172,13 @@ public class BlackNumAcyivity extends Activity {
 			@Override
 			public void run() {
 				// 调用查询方法
-				arrayList = BlackNumDao.getInstance(getApplicationContext()).find(0);
+				arrayList = BlackNumDao.getInstance(getApplicationContext())
+						.find(0);
 				// 发送消息
 				handler.sendEmptyMessage(0);
 				super.run();
 			}
-		};
+		}.start();
 
 	}
 
@@ -209,7 +210,6 @@ public class BlackNumAcyivity extends Activity {
 					// 判断是数据库的总数是不是大于现在集合的个数
 					int num = BlackNumDao.getInstance(getApplicationContext())
 							.getCount();
-					System.out.println("==========================" + num);
 
 					if (num > arrayList.size()) {
 
@@ -217,15 +217,22 @@ public class BlackNumAcyivity extends Activity {
 						if (ls_blacknum.getLastVisiblePosition() >= arrayList
 								.size() - 1 && !mIsLoad) {
 							// 加载下面20个条目
-							ArrayList<BlackNumInfo> moreArrayList = BlackNumDao
-									.getInstance(getApplicationContext()).find(
-											arrayList.size());
-							// 将新加载的条目放入之前的集合、
-							arrayList.addAll(moreArrayList);
-							// 发送消息
-							handler.sendEmptyMessage(0);
-							// 更改mIsLoad值
-							mIsLoad = true;
+							new Thread() {
+								public void run() {
+
+									ArrayList<BlackNumInfo> moreArrayList = BlackNumDao
+											.getInstance(
+													getApplicationContext())
+											.find(arrayList.size());
+									// 将新加载的条目放入之前的集合、
+									arrayList.addAll(moreArrayList);
+									// 发送消息
+									handler.sendEmptyMessage(0);
+									// 更改mIsLoad值
+									mIsLoad = true;
+
+								};
+							}.start();
 						}
 					}
 
