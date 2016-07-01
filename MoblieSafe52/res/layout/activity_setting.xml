@@ -39,5 +39,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </com.itheima52.mobilesafe.view.SettingSelectView>
+    
+     <com.itheima52.mobilesafe.view.SettingItemView
+         
+        android:id="@+id/siv_black_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        itheima:desc_of="黑名单拦截已关闭"
+        itheima:desc_on="黑名单拦截已开启"
+        itheima:title="黑名单拦截设置" >
+    </com.itheima52.mobilesafe.view.SettingItemView>
 
 </LinearLayout>

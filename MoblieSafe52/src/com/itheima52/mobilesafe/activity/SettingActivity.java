@@ -9,10 +9,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
 
 import com.itheima52.mobilesafe.R;
+import com.itheima52.mobilesafe.service.BlackNumService;
 import com.itheima52.mobilesafe.service.NumAddressService;
+import com.itheima52.mobilesafe.utils.ServiceUtils;
 import com.itheima52.mobilesafe.view.SettingItemView;
 import com.itheima52.mobilesafe.view.SettingSelectView;
 
@@ -34,6 +35,43 @@ public class SettingActivity extends Activity {
 		initNumAddress();
 		initAddressStyle();
 		intiAddressLocation();
+		intBlackNum();
+	}
+
+	/**
+	 * 初始化黑名单
+	 */
+	private void intBlackNum() {
+
+		final SettingItemView black_num = (SettingItemView) findViewById(R.id.siv_black_num);
+
+		boolean isRunning = ServiceUtils.isRunning(getApplicationContext(),
+				"com.itheima52.mobilesafe.service.BlackNumService");
+		// 进页面前检查(如果服务开启就勾选)
+		black_num.setChecked(isRunning);
+
+		black_num.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// 点击设置
+				boolean checked = black_num.isChecked();
+				black_num.setChecked(!checked);
+
+				// 逻辑判断
+				if (!checked) {
+					// 开启服务
+					startService(new Intent(getApplicationContext(),
+							BlackNumService.class));
+
+				} else {
+					// 关闭服务
+					stopService(new Intent(getApplicationContext(),
+							BlackNumService.class));
+				}
+
+			}
+		});
 
 	}
 
@@ -107,8 +145,6 @@ public class SettingActivity extends Activity {
 					// 开启号码归属地服务
 					startService(new Intent(SettingActivity.this,
 							NumAddressService.class));
-					// 开启去电receiver
-
 				}
 
 			}
@@ -119,13 +155,12 @@ public class SettingActivity extends Activity {
 	/**
 	 * 初始化归属地显示风格
 	 */
-	
-	
+
 	final String[] style = new String[] { "半透明", "活力橙", "卫士蓝", "金属灰", "苹果绿" };
-	
+
 	private void initAddressStyle() {
 		styleSelect = (SettingSelectView) findViewById(R.id.siv_style_select);
-		
+
 		int style1 = sharedPreferences2.getInt("address_style", 0);
 
 		styleSelect.setTitle("归属地提示框风格");
@@ -143,24 +178,26 @@ public class SettingActivity extends Activity {
 		});
 
 	}
+
 	/**
 	 * 初始化
 	 */
 	private void intiAddressLocation() {
-		
+
 		SettingSelectView addressLocation = (SettingSelectView) findViewById(R.id.siv_address_location);
-		
+
 		addressLocation.setTitle("归属地提示框位置");
 		addressLocation.setDesc("设置归属地提示框位置");
-		//设置点击事件
+		// 设置点击事件
 		addressLocation.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// 调转进调整归属地显示框页面
-				
-			startActivity(new Intent(SettingActivity.this,AdjustLocatonActivity.class));
-				
+
+				startActivity(new Intent(SettingActivity.this,
+						AdjustLocatonActivity.class));
+
 			}
 		});
 
@@ -170,26 +207,24 @@ public class SettingActivity extends Activity {
 	 * 弹出单选对话框
 	 */
 	private void showSingleDialog() {
-		
-		
+
 		int style1 = sharedPreferences2.getInt("address_style", 0);
 		AlertDialog.Builder singleChoice = new Builder(SettingActivity.this);
 
 		singleChoice.setTitle("归属地提示框风格");
 
-		
-		//默认选项
+		// 默认选项
 		singleChoice.setSingleChoiceItems(style, style1,
 				new AlertDialog.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						//点击选项，把选项保存在share preference中。
-						sharedPreferences2.edit().putInt("address_style", which).commit();
-						
+						// 点击选项，把选项保存在share preference中。
+						sharedPreferences2.edit()
+								.putInt("address_style", which).commit();
+
 						styleSelect.setDesc(style[which]);
-						
-						
+
 						dialog.dismiss();
 
 					}
@@ -197,7 +232,7 @@ public class SettingActivity extends Activity {
 				});
 
 		singleChoice.setNegativeButton("取消", null);
-		
+
 		singleChoice.show();
 
 	}

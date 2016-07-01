@@ -50,6 +50,9 @@
         <!-- 位置服务 -->
         <service android:name="com.itheima52.mobilesafe.service.LocationService" >
         </service>
+         <!-- 黑名单拦截 -->
+        <service android:name="com.itheima52.mobilesafe.service.BlackNumService" >
+        </service>
 
         <!-- 号码归属地服务 -->
         <service android:name="com.itheima52.mobilesafe.service.NumAddressService" >
