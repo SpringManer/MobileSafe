@@ -124,6 +124,20 @@ public class BlackNumAcyivity extends Activity {
 				break;
 			}
 
+			//删除号码逻辑
+			DeleteNum(position, viewHold, phone);
+
+			return convertView;
+		}
+
+		/**
+		 * 删除listView中的号码
+		 * @param position  号码位置
+		 * @param viewHold  
+		 * @param phone  删除的号码字段
+		 */
+		private void DeleteNum(final int position, ViewHold viewHold,
+				final String phone) {
 			viewHold.iv_item_delete.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -141,8 +155,6 @@ public class BlackNumAcyivity extends Activity {
 
 				}
 			});
-
-			return convertView;
 		}
 
 	}
@@ -321,11 +333,11 @@ public class BlackNumAcyivity extends Activity {
 					blackNumInfo.mode = mode + "";
 					arrayList.add(0, blackNumInfo);
 
-					// [4]更新适配器
-					if (mAdptor != null) {
-
-						mAdptor.notifyDataSetChanged();
-					}
+//					// [4]更新适配器
+//					if (mAdptor != null) {
+//
+//						mAdptor.notifyDataSetChanged();
+//					}
 
 					// [5]给handle发消息，更新适配器
 					handler.sendEmptyMessage(0);

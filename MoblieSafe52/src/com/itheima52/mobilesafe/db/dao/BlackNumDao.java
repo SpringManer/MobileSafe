@@ -191,4 +191,29 @@ public class BlackNumDao {
 		return mCount;
 		
 	}
+	/**
+	 * 根据所给的号码，查询数据库返回所拦截的状态
+	 * @param num
+	 * @return
+	 */
+	public int findNum(String num ){
+		
+		int  mode = 0;
+		SQLiteDatabase writableDatabase = blackNumOpenHelper
+				.getWritableDatabase();
+
+		Cursor query = writableDatabase.query("blacknumber", new String[]{"mode"}, "phone= ?", new String[]{num}, null, null, null);
+		
+		
+		if(query.moveToNext()){
+			mode = query.getInt(0);
+		}
+
+		//关闭
+		query.close();
+		writableDatabase.close();
+		
+		return mode;
+		
+	}
 }
