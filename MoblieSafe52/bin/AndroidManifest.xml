@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="16" />
     
      <instrumentation
@@ -31,6 +31,8 @@
     <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
 
 
     <application
@@ -88,7 +90,7 @@
         <activity android:name="com.itheima52.mobilesafe.activity.AdvanceToolsActivity" >
         </activity>
         <!-- 归属地查询 -->
-        <activity android:name="com.itheima52.mobilesafe.activity.AdvToolAddressActivity" >
+        <activity android:name="com.itheima52.mobilesafe.activity.AdvNumAddressActivity" >
         </activity>
         <!-- 来电号码显示框自定义位置 -->
         <activity
@@ -98,6 +100,10 @@
 
         <!-- 黑名单页面 -->
         <activity android:name="com.itheima52.mobilesafe.activity.BlackNumAcyivity" >
+        </activity>
+        
+        <!-- 软件管理页面 -->
+        <activity android:name="com.itheima52.mobilesafe.activity.AppManagerActivity" >
         </activity>
         <!-- 一键锁屏receiver -->
         <receiver

@@ -92,7 +92,12 @@ public class HomeActivity extends Activity {
 					
 
 					break;
+					//进入软件页面
 				case 2:
+					//跳页面
+					Intent intent2 = new Intent(getApplicationContext(),
+							AppManagerActivity.class);
+					startActivity(intent2);
 
 					break;
 				case 3:

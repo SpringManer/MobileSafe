@@ -10,17 +10,24 @@
 
     <TextView
         android:id="@+id/tv_location_query"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       android:background="@drawable/textview_pink_select"
-        android:drawableLeft="@android:drawable/ic_menu_camera"
-        android:focusableInTouchMode="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:text="号码归属地查询"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
+        style="@style/AdvToolItemStyle"
+        android:text="号码归属地查询" >
+    </TextView>
+
+    <TextView
+         android:id="@+id/tv_adv_sms_backup"
+        style="@style/AdvToolItemStyle"
+        android:text="短信备份" >
+    </TextView>
+
+    <TextView
+        style="@style/AdvToolItemStyle"
+        android:text="常用号码查询" >
+    </TextView>
+
+    <TextView
+        style="@style/AdvToolItemStyle"
+        android:text="程序锁" >
+    </TextView>
 
 </LinearLayout>
